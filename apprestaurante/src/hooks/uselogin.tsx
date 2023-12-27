@@ -1,4 +1,6 @@
 import {ChangeEvent,useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 function useLogin() {
   const [DataUser, setDataUser] = useState({
@@ -6,7 +8,7 @@ function useLogin() {
     password: "",
   });
 
- 
+ const redirect= useNavigate();
 
   const handleChangeUser = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -32,11 +34,41 @@ function useLogin() {
 
      console.log(response);
 
+      if (response.status === 200) {
+        console.log("correo de inicio de seccion enviados")
+      } else {
+        throw new Error("Error al enviar los datos");
+      }
+
 
 } catch (error){
     console.log(error)
 
 }}
+
+
+const ValidarToken = async (token:string) => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/auth/valdateseccion/${token}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // No es necesario enviar el cuerpo en una solicitud GET
+      });
+  
+      const data = await response.json();
+      console.log(data);
+
+    if (response.status === 200) {
+      redirect("/user/reservation");
+    } else {
+      redirect("/login");
+    }
+  } catch (error) {
+    console.log(error);
+  }
+}
 
   
 
@@ -44,6 +76,7 @@ function useLogin() {
     handleChangeUser,
     handleSeccion,
     DataUser,
+    ValidarToken,
   };
 
 }
