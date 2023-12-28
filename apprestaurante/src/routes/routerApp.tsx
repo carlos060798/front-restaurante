@@ -6,7 +6,7 @@ import LayautPublic from "../pages/layautpublic";
 import RutaUser from "../compont/admin/home";
 import LayautAdmin from "../compont/admin/layautadmin";
 import CreateRerseva from "../compont/admin/componet/createreservation";
-import ListReservation from "../compont/admin/componet/createreservation";
+import ListReservation from "../compont/admin/componet/listreservation";
 import Profile from "../compont/general/profile";
 import Validseccion from "../pages/validationseccion";
 
