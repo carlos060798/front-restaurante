@@ -9,6 +9,8 @@ import CreateRerseva from "../compont/admin/componet/createreservation";
 import ListReservation from "../compont/admin/componet/listreservation";
 import Profile from "../compont/general/profile";
 import Validseccion from "../pages/validationseccion";
+import {NotFound404Alternate} from "../compont/general/pagenotfound";
+import EmailSentSuccess from "../compont/general/pagemensage";
 
 
 
@@ -27,7 +29,9 @@ function RoutesApp() {
           <Route path="listreservation" element={<ListReservation />} />
           <Route path="perfil" element={<Profile/>} />
         </Route>
+        <Route path="email-login" element={<EmailSentSuccess />} />
         <Route path="validacion/:token" element={<Validseccion />} />
+        <Route path="*" element={<NotFound404Alternate/>} />
       </Routes>
 
       

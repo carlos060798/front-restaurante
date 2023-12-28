@@ -37,6 +37,7 @@ function useLogin() {
       console.log(response);
 
       if (response.status === 200) {
+        redirect("/email-login")
         console.log("correo de inicio de seccion enviados");
       } else {
         throw new Error("Error al enviar los datos");
