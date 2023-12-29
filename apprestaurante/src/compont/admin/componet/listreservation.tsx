@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import ReservationTable from './ReservationTable';
 import EditReservationModal from './EditReservationModal';
+import { Container } from 'react-bootstrap';
 
 function ListReservation()  {
   const [reservations, setReservations] = useState([]);
@@ -25,6 +26,7 @@ function ListReservation()  {
   };
 
   return (
+    <Container className="w-h-100">
     <div>
       <h2>Mis Reservas</h2>
       <ReservationTable reservations={reservations} onEdit={handleEdit} onDelete={handleDelete} />
@@ -35,6 +37,7 @@ function ListReservation()  {
         reservationData={selectedReservation}
       />
     </div>
+    </Container>
   );
 };
 

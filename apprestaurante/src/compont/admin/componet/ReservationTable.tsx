@@ -1,4 +1,4 @@
-import { Table, Button } from "react-bootstrap";
+import { Table, Button, Container } from "react-bootstrap";
 
 const ReservationTable = ({ reservations, onEdit, onDelete }) => {
   const Reservations = [
@@ -16,6 +16,7 @@ const ReservationTable = ({ reservations, onEdit, onDelete }) => {
     },
   ];
   return (
+  <Container>
     <Table striped bordered hover>
       <thead>
         <tr>
@@ -43,6 +44,7 @@ const ReservationTable = ({ reservations, onEdit, onDelete }) => {
         ))}
       </tbody>
     </Table>
+    </Container>
   );
 };
 

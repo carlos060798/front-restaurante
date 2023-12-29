@@ -37,6 +37,8 @@ function useLogin() {
       console.log(response);
 
       if (response.status === 200) {
+        const data= await response.json();
+        localStorage.setItem("token", data.token);
         redirect("/email-login")
         console.log("correo de inicio de seccion enviados");
       } else {
@@ -80,12 +82,16 @@ function useLogin() {
           },
         }
       );
-  
+   
+
       if (response.ok === true) {
-        console.log("Redirigiendo a /user");
+        const data = await response.json();
+      
+      // Almacena el token y el ID del usuario en el almacenamiento local
+  
+      localStorage.setItem("userId", data.userdata.id);
         redirect("/user");
       } else {
-        console.log("Redirigiendo a /login debido a un problema en la respuesta");
         redirect("/login");
       }
     } catch (error) {
