@@ -7,6 +7,7 @@ function UseReserva() {
     });
 
     const [Reservas, setReservas] = useState([])
+    const[Reserva, setReserva] = useState({})
     const handleReserva = async (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         e.preventDefault();
         const usuarioid = localStorage.getItem("userId");
@@ -66,6 +67,27 @@ function UseReserva() {
           console.log(error);
         }
       };
+
+    const  getReserva= async (id:string) => {
+        try {
+          const response = await fetch(`http://localhost:5000/api/reservation/${id}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
+    
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            setReserva(data); // Asegurarse de que setReservas recibe un array
+          } else {
+            throw new Error("Error al obtener la reserva");
+          }
+        } catch (error) {
+          console.log(error);
+        }
+    }
     
   
     return {
@@ -73,7 +95,9 @@ function UseReserva() {
         handleReserva,
         DataReserva,
         Reservas,
-        getReservas
+        getReservas,
+        getReserva,
+        Reserva
     };
 }
 export default UseReserva;
