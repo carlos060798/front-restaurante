@@ -1,8 +1,8 @@
-import { Table, Button, Container } from "react-bootstrap";
 import React from "react";
+import { Table, Button, Container } from "react-bootstrap";
 import UseReserva from "../../../hooks/useReserva";
 
-const ReservationTable = ({onEdit, onDelete }) => {
+const ReservationTable = () => {
   const { Reservas, getReservas } = UseReserva();
   console.log("reservas", Reservas);
 
@@ -11,7 +11,15 @@ const ReservationTable = ({onEdit, onDelete }) => {
     getReservas();
   }, []); // El array vacío asegura que se ejecute solo al montar el componente
 
- 
+  const handleEdit = (id) => {
+    // Lógica para editar la reserva
+    console.log("Editar reserva", id);
+  };
+
+  const handleDelete = (id) => {
+    // Lógica para eliminar la reserva
+    console.log("Eliminar reserva", Id);
+  };
 
   return (
     <Container>
@@ -31,10 +39,10 @@ const ReservationTable = ({onEdit, onDelete }) => {
               <td>{reservation.tipoReserva}</td>
               <td>{reservation.cantidadPersonas}</td>
               <td>
-                <Button variant="info" onClick={() => onEdit(reservation.id)}>
+                <Button variant="info" onClick={() => handleEdit(reservation)}>
                   Editar
                 </Button>{" "}
-                <Button variant="danger" onClick={() => onDelete(reservation.id) }>
+                <Button variant="danger" onClick={() => handleDelete(reservation.id)}>
                   Eliminar
                 </Button>
               </td>
@@ -46,4 +54,4 @@ const ReservationTable = ({onEdit, onDelete }) => {
   );
 };
 
-export default ReservationTable;
+export default ReservationTable;  

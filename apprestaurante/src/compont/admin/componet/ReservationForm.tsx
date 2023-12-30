@@ -1,11 +1,15 @@
 import { Form, Button, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClipboardList, faUsers, faPlus } from '@fortawesome/free-solid-svg-icons';
+import UseReserva from '../../../hooks/useReserva';
 
 const ReservationForm = () => {
+  const {handleChange,
+    handleReserva,
+    DataReserva,}= UseReserva();
   return (
     <Col xs={12} md={10} lg={8} >
-    <Form className="border p-4 rounded">
+    <Form className="border p-4 rounded" onSubmit={handleReserva}>
       <h2 className="text-center mb-4">
         <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
         Reserva de Mesa
@@ -16,7 +20,10 @@ const ReservationForm = () => {
           <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
           Fecha de Reserva
         </Form.Label>
-        <Form.Control type="date" name="fechaReserva" />
+        <Form.Control type="date" name="fechaReserva" 
+        onChange={handleChange}
+        value={DataReserva.fechaReserva}
+        />
       </Form.Group>
 
       <Form.Group controlId="tipoReserva">
@@ -24,12 +31,18 @@ const ReservationForm = () => {
           <FontAwesomeIcon icon={faClipboardList} className="mr-2" />
           Tipo de Reserva
         </Form.Label>
-        <Form.Control
-          type="text"
-          name="tipoReserva"
-          placeholder="Ej. Cumpleaños, Aniversario, etc."
-          required
-        />
+        <Form.Control as="select" name="tipoReserva"
+        onChange={handleChange}
+        value={DataReserva.tipoReserva}
+        required>
+          <option value="" disabled selected>
+            Seleccione el tipo de reserva
+          </option>
+          <option value="cena">Cena</option>
+          <option value="almuerzo">Almuerzo</option>
+          <option value="desayuno">Desayuno</option>
+          <option value="fechaEspecial">Fecha Especial</option>
+        </Form.Control>
       </Form.Group>
 
       <Form.Group controlId="cantidadPersonas">
@@ -41,6 +54,8 @@ const ReservationForm = () => {
           type="number"
           name="cantidadPersonas"
           placeholder="Ingrese la cantidad de personas"
+          onChange={handleChange}
+          value={DataReserva.cantidadPersonas}
           required
         />
       </Form.Group>
