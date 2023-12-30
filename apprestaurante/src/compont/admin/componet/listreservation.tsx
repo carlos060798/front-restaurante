@@ -1,18 +1,26 @@
 
-import { useState } from 'react';
+import { useState} from 'react';
 import ReservationTable from './ReservationTable';
 import EditReservationModal from './EditReservationModal';
 import { Container } from 'react-bootstrap';
 
 function ListReservation()  {
-  const [reservations, setReservations] = useState([]);
   const [showModal, setShowModal] = useState(false);
-  const [selectedReservation, setSelectedReservation] = useState(null);
+  const [reservaSeleccionadaid, setReservaSeleccionadaid] = useState('');
 
-  const handleEdit = (reservation) => {
-    setSelectedReservation(reservation);
+ 
+
+const handleEdit = async (id: string) => {
+  try {
+    console.log("id", id);
+    setReservaSeleccionadaid(id);
     setShowModal(true);
-  };
+  } catch (error) {
+    console.error(error);
+    // Manejar el error, por ejemplo, mostrar un mensaje al usuario
+  }
+};
+
 
   const handleDelete = (reservationId) => {
     // Implementa la lógica para eliminar la reserva según el ID
@@ -29,12 +37,12 @@ function ListReservation()  {
     <Container className="w-h-100">
     <div>
       <h2>Mis Reservas</h2>
-      <ReservationTable reservations={reservations} onEdit={handleEdit} onDelete={handleDelete} />
+      <ReservationTable  onEdit={handleEdit} onDelete={handleDelete} />
       <EditReservationModal
         show={showModal}
         onHide={() => setShowModal(false)}
         onSubmit={handleModalSubmit}
-        reservationData={selectedReservation}
+        reservationData={reservaSeleccionadaid || "valor por defecto"}
       />
     </div>
     </Container>

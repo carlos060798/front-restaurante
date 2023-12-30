@@ -3,8 +3,7 @@ import React from "react";
 import UseReserva from "../../../hooks/useReserva";
 
 const ReservationTable = ({onEdit, onDelete }) => {
-  const { Reservas, getReservas,getReserva } = UseReserva();
-  console.log("reservas", Reservas);
+  const { Reservas, getReservas } = UseReserva();
 
   // Llamar a getReservas para obtener las reservas al montar el componente
   React.useEffect(() => {

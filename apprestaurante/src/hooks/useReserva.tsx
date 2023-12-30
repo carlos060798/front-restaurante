@@ -68,32 +68,37 @@ function UseReserva() {
         }
       };
 
-    const  getReserva= async (id:string) => {
-        try {
-          const response = await fetch(`http://localhost:5000/api/reservation/${id}`, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
     
-          if (response.ok) {
-            const data = await response.json();
-            console.log(data);
-            setReserva(data); // Asegurarse de que setReservas recibe un array
-          } else {
-            throw new Error("Error al obtener la reserva");
-          }
+      const getReserva = async (id: string) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/reservation/${id}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                setReserva(data); // Asegurarse de que setReserva recibe un objeto
+                console.log(data);
+                return data; // Devuelve la reserva obtenida
+            } else {
+                throw new Error("Error al obtener la reserva");
+            }
         } catch (error) {
-          console.log(error);
+            console.log(error);
+            throw error; // Re-lanza el error para que pueda ser manejado en el componente llamador
         }
-    }
+    };
+    
     
   
     return {
         handleChange,
         handleReserva,
         DataReserva,
+        setDataReserva,
         Reservas,
         getReservas,
         getReserva,
