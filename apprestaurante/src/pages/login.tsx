@@ -8,7 +8,7 @@ const LoginForm = () => {
 
   return (
     <Container>
-      <div className="d-flex align-items-center justify-content-center vh-100">
+      <div className="d-flex align-items-center justify-content-center mt-5">
         <Form className="border p-4 rounded col-12 col-md-6 col-lg-4 " onSubmit={handleSeccion}>
           <h2 className="mb-4 text-center">Iniciar Sesión</h2>
           <Col xs={12} lg={12} className="text-center">

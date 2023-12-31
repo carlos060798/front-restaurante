@@ -4,6 +4,8 @@ import ReservationTable from './ReservationTable';
 import EditReservationModal from './EditReservationModal';
 import { Container } from 'react-bootstrap';
 import UseReserva from '../../../hooks/useReserva';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 function ListReservation()  {
   const [showModal, setShowModal] = useState(false);
@@ -19,7 +21,6 @@ const handleEdit = async (id: string) => {
     setShowModal(true);
   } catch (error) {
     console.error(error);
-    // Manejar el error, por ejemplo, mostrar un mensaje al usuario
   }
 };
 
@@ -28,16 +29,20 @@ const handleEdit = async (id: string) => {
     deleteReserva(reservationId)
   };
 
-  const handleModalSubmit = (updatedReservation) => {
-    // Implementa la lógica para actualizar la reserva
-    // setReservations([...]); // Actualiza el estado de las reservas
+  const handleModalSubmit = () => {
+
     setShowModal(false);
   };
 
   return (
-    <Container className="w-h-100">
+    <Container >
     <div>
-      <h2>Mis Reservas</h2>
+    <div className="text-center">
+      <h2 className="text-primary fw-bold">
+        <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
+        Mis Reservas
+      </h2>
+    </div>
       <ReservationTable  onEdit={handleEdit} onDelete={handleDelete}  />
       <EditReservationModal
         show={showModal}

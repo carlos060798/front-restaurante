@@ -1,6 +1,9 @@
 import { Table, Button, Container } from "react-bootstrap";
 import React from "react";
 import UseReserva from "../../../hooks/useReserva";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { formatearFecha } from "../../../helpers/fechaform";
 
 const ReservationTable = ({onEdit, onDelete }) => {
   const { Reservas, getReservas } = UseReserva();
@@ -26,16 +29,18 @@ const ReservationTable = ({onEdit, onDelete }) => {
         <tbody>
           {Array.isArray(Reservas) && Reservas.map((reservation) => (
             <tr key={reservation.id}>
-              <td>{reservation.fechaReserva}</td>
+              <td>{formatearFecha(reservation.fechaReserva)}</td>
               <td>{reservation.tipoReserva}</td>
               <td>{reservation.cantidadPersonas}</td>
               <td>
-                <Button variant="info" onClick={() => onEdit(reservation.id)}>
-                  Editar
-                </Button>{" "}
-                <Button variant="danger" onClick={() => onDelete(reservation.id) }>
-                  Eliminar
-                </Button>
+              <Button variant="info" onClick={() => onEdit(reservation.id)}>
+        <FontAwesomeIcon icon={faEdit} className="mr-2" />
+        
+      </Button>{" "}
+      <Button variant="danger" onClick={() => onDelete(reservation.id)}>
+        <FontAwesomeIcon icon={faTrash} className="mr-2" />
+        
+      </Button>
               </td>
             </tr>
           ))}

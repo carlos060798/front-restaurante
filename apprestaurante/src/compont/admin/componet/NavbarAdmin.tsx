@@ -8,45 +8,53 @@ import {
   faCog,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import useLogin from "../../../hooks/uselogin";
+
+
 
 function Sidebar() {
-  const navLinks = [
-    { to: "/user/reservation", text: "Reservar", icon: faUtensils },
-    { to: "/user/listreservation", text: "Lista de Reservas", icon: faList },
-    { to: "/user/perfil", text: "Perfil", icon: faUser },
-    { to: "/logout", text: "Cerrar Sesión", icon: faSignOutAlt },
-  ];
+  const {CerrarSeccion } = useLogin();
+ 
 
   return (
     <Navbar expand="md" className="bg-body-tertiary mb-3">
       <Container>
         <Navbar.Brand href="#">
-          {" "}
-          <FontAwesomeIcon icon={faCog} className="mr-2" />
-          AppRestaurant
+          <h4 className="fw-bold"><FontAwesomeIcon icon={faCog} className="mr-2 fw-bold" />RestaurantApp</h4>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="offcanvasNavbar" />
-        <Navbar.Offcanvas
-          id="offcanvasNavbar"
-          aria-labelledby="offcanvasNavbarLabel"
-          placement="end"
-        >
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title id="offcanvasNavbarLabel">
-              Offcanvas
-            </Offcanvas.Title>
-          </Offcanvas.Header>
-          <Offcanvas.Body>
-            <Nav className="justify-content-end flex-grow-1 pe-3">
-              {navLinks.map((link) => (
-                <Nav.Link as={Link} to={link.to} key={link.to}>
-                  <FontAwesomeIcon icon={link.icon} className="mr-2" />
-                  {link.text}
+        <Navbar.Collapse id="offcanvasNavbar">
+          <Navbar.Offcanvas
+            placement="end"
+            className="w-75" // Ajusta el ancho según sea necesario
+          >
+            <Offcanvas.Header closeButton>
+              <Offcanvas.Title id="offcanvasNavbarLabel">
+                AppRestaurant
+              </Offcanvas.Title>
+            </Offcanvas.Header>
+            <Offcanvas.Body>
+              <Nav className="justify-content-end flex-grow-1 pe-3">
+                <Nav.Link as={Link} to="/user/reservation">
+                  <FontAwesomeIcon icon={faUtensils} className="mr-2" />
+                  Reservar
                 </Nav.Link>
-              ))}
-            </Nav>
-          </Offcanvas.Body>
-        </Navbar.Offcanvas>
+                <Nav.Link as={Link} to="/user/listreservation">
+                  <FontAwesomeIcon icon={faList} className="mr-2" />
+                  Lista de Reservas
+                </Nav.Link>
+                <Nav.Link as={Link} to="/user/perfil">
+                  <FontAwesomeIcon icon={faUser} className="mr-2" />
+                  Perfil
+                </Nav.Link>
+                <Nav.Link as={Link} to="#" onClick={CerrarSeccion}>
+                  <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
+                  Sign Out
+                </Nav.Link>
+              </Nav>
+            </Offcanvas.Body>
+          </Navbar.Offcanvas>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );

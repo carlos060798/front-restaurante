@@ -37,9 +37,9 @@ function useLogin() {
       console.log(response);
 
       if (response.status === 200) {
-        const data= await response.json();
+        const data = await response.json();
         localStorage.setItem("token", data.token);
-        redirect("/email-login")
+        redirect("/email-login");
         console.log("correo de inicio de seccion enviados");
       } else {
         throw new Error("Error al enviar los datos");
@@ -82,14 +82,13 @@ function useLogin() {
           },
         }
       );
-   
 
       if (response.ok === true) {
         const data = await response.json();
-      
-      // Almacena el token y el ID del usuario en el almacenamiento local
-  
-      localStorage.setItem("userId", data.userdata.id);
+
+        // Almacena el token y el ID del usuario en el almacenamiento local
+
+        localStorage.setItem("userId", data.userdata.id);
         redirect("/user");
       } else {
         redirect("/login");
@@ -99,11 +98,17 @@ function useLogin() {
       redirect("/login"); // Manejo de errores: redirige a /login en caso de error
     }
   };
+  const CerrarSeccion = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("userId");
+    redirect("/login");
+  };
   return {
     handleChangeUser,
     handleSeccion,
     DataUser,
     ValidarToken,
+    CerrarSeccion,
   };
 }
 

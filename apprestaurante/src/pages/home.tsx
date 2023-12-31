@@ -1,7 +1,7 @@
 import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser,faSignInAlt } from '@fortawesome/free-solid-svg-icons';
-import FormUser from '../compont/general/FormUser';
+import FormUser from '../compont/general/FormUserEdit';
 
 const HomePage = () => {
   return (
