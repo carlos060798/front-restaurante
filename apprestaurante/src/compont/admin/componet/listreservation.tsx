@@ -37,7 +37,7 @@ const handleEdit = async (id: string) => {
     <Container className="w-h-100">
     <div>
       <h2>Mis Reservas</h2>
-      <ReservationTable  onEdit={handleEdit} onDelete={handleDelete} />
+      <ReservationTable  onEdit={handleEdit} onDelete={handleDelete}  />
       <EditReservationModal
         show={showModal}
         onHide={() => setShowModal(false)}

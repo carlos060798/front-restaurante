@@ -116,9 +116,14 @@ const FormEdit = ({ initialData, onSubmit }: Props) => {
   
   }, [initialData]);
 
+  const handlesubmit = () => {
+    console.log("initialData", DataReserva);
+  onSubmit();
+  }
+
   return (
     <Col>
-      <Form className="border p-4 rounded" onSubmit={onSubmit}>
+      <Form className="border p-4 rounded" onSubmit={handlesubmit}>
         <h2 className="text-center mb-4">
           <FontAwesomeIcon icon={faCalendarAlt} className="mr-2" />
           Edita tu Reserva
@@ -133,7 +138,8 @@ const FormEdit = ({ initialData, onSubmit }: Props) => {
             type="date"
             name="fechaReserva"
             onChange={handleChange}
-            value={formatearFecha(DataReserva.fechaReserva)}
+            value={DataReserva.fechaReserva.split('T')[0]} // Solo toma la parte de la fecha (yyyy-MM-dd)
+
 
           />
         </Form.Group>
