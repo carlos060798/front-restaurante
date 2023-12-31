@@ -44,6 +44,8 @@ function UseReserva() {
             ...prevFormData,
             [name]: value,
         }));
+
+        console.log(DataReserva);
     };
 
     const getReservas = async () => {
