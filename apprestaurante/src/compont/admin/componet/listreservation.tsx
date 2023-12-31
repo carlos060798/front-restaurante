@@ -3,10 +3,12 @@ import { useState} from 'react';
 import ReservationTable from './ReservationTable';
 import EditReservationModal from './EditReservationModal';
 import { Container } from 'react-bootstrap';
+import UseReserva from '../../../hooks/useReserva';
 
 function ListReservation()  {
   const [showModal, setShowModal] = useState(false);
   const [reservaSeleccionadaid, setReservaSeleccionadaid] = useState('');
+  const {deleteReserva } = UseReserva();
 
  
 
@@ -22,9 +24,8 @@ const handleEdit = async (id: string) => {
 };
 
 
-  const handleDelete = (reservationId) => {
-    // Implementa la lógica para eliminar la reserva según el ID
-    // setReservations([...]); // Actualiza el estado de las reservas
+  const handleDelete = (reservationId:string) => {
+    deleteReserva(reservationId)
   };
 
   const handleModalSubmit = (updatedReservation) => {

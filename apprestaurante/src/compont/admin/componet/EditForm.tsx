@@ -5,7 +5,7 @@ import { faCalendarAlt, faClipboardList, faUsers, faPlus } from '@fortawesome/fr
 import UseReserva from '../../../hooks/useReserva';
 
 const FormEdit = ({ initialData, onSubmit }: Props) => {
-  const { handleChange, DataReserva, setDataReserva, getReserva } = UseReserva();
+  const { handleChange, DataReserva, setDataReserva, getReserva ,updateReserva} = UseReserva();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,10 +22,16 @@ const FormEdit = ({ initialData, onSubmit }: Props) => {
   
   }, [initialData]);
 
-  const handlesubmit = () => {
-    console.log("initialData", DataReserva);
-  onSubmit();
-  }
+  const handlesubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        await updateReserva(initialData); // Llama a updateReserva con el ID correcto
+        onSubmit();
+    } catch (error) {
+        console.error("Error al actualizar la reserva:", error);
+    }
+}
 
   return (
     <Col>

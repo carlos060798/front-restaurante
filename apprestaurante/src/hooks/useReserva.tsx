@@ -94,6 +94,52 @@ function UseReserva() {
         }
     };
     
+    const updateReserva = async (id: string) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/reservation/${id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(DataReserva), // Usa DataReserva en lugar de Reserva
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                setDataReserva(data); // Actualiza DataReserva con los datos actualizados
+                return data;
+            } else {
+                throw new Error("Error al actualizar la reserva");
+            }
+        } catch (error) {
+            console.log(error);
+            throw error;
+        }
+    }
+
+
+    const deleteReserva = async (id: string) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/reservation/${id}`, {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            });
+    
+            if (response.ok) {
+                const data = await response.json();
+                setReserva(data); // Asegurarse de que setReserva recibe un objeto
+                console.log(data);
+                return data; // Devuelve la reserva obtenida
+            } else {
+                throw new Error("Error al obtener la reserva");
+            }
+        } catch (error) {
+            console.log(error);
+            throw error; // Re-lanza el error para que pueda ser manejado en el componente llamador
+        }
+    }
     
   
     return {
@@ -104,7 +150,9 @@ function UseReserva() {
         Reservas,
         getReservas,
         getReserva,
-        Reserva
+        Reserva,
+        updateReserva,
+        deleteReserva
     };
 }
 export default UseReserva;
