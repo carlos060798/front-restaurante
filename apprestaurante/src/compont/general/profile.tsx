@@ -8,11 +8,10 @@ import FormUser from './FormUserEdit';
 function Profile() {
   return (
     <Container>
-      <Row className="justify-content-center mt-5">
-        <Col xs={12} md={8} lg={6}>
+      <Row className="justify-content-center mt-3">
+        <Col xs={12} md={8} lg={4}>
           <div className="text-center">
-            <FontAwesomeIcon icon={faUser} size="4x" color="#007bff" />
-            <h1 className="mt-3">Perfil</h1>
+            <FontAwesomeIcon icon={faUser} size="2x" color="#007bff" />
           </div>
           <FormUser />
         </Col>
