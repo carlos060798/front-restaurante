@@ -12,10 +12,12 @@ function UseReserva() {
         e.preventDefault();
         const usuarioid = localStorage.getItem("userId");
         console.log(usuarioid);
+    
         // Validar que no falten campos
         if ([DataReserva.fechaReserva, DataReserva.tipoReserva, DataReserva.cantidadPersonas].includes("")) {
             throw new Error("Invalid form data");
         }
+    
         try {
             // Enviar al backend
             const response = await fetch(`http://localhost:5000/api/reservation/${usuarioid}`, {
@@ -24,13 +26,17 @@ function UseReserva() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify(DataReserva),
-            });
-            console.log(response);
-            const data = await response.json();
-            console.log(data);
-
+            });    
             if (response.ok) {
-                //redireccion("/login");
+                // Limpiar los valores del formulario después de una reserva exitosa
+                setDataReserva({
+                    fechaReserva: "",
+                    tipoReserva: "",
+                    cantidadPersonas: "",
+                });
+    
+                // Actualizar la lista de reservas
+                await getReservas();
             } else {
                 throw new Error("Error al registrar usuario");
             }

@@ -11,7 +11,7 @@ const ReservationTable = ({onEdit, onDelete }) => {
   // Llamar a getReservas para obtener las reservas al montar el componente
   React.useEffect(() => {
     getReservas();
-  }, []); // El array vacío asegura que se ejecute solo al montar el componente
+  }, [Reservas]); // El array vacío asegura que se ejecute solo al montar el componente
 
  
 

@@ -2,10 +2,15 @@ import { Link } from 'react-router-dom';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
+import { useNavigate } from 'react-router-dom';
 
+const  NotFound404Alternate = () => {
+  const navigate = useNavigate();
 
-// Componente de Error 404 Alternativo
-const NotFound404Alternate = () => {
+  const handleBack= () => {
+    // Redirigir al enlace previo
+    navigate(-1);
+  };
   return (
     <Container className="text-center mt-5">
       <Row>
@@ -13,7 +18,7 @@ const NotFound404Alternate = () => {
           <FontAwesomeIcon icon={faExclamationTriangle} size="4x" color="#ffc107" />
           <h1 className="mt-3">Error 404</h1>
           <p>Oops, algo salió mal. La página que buscas no se encuentra.</p>
-          <Button as={Link} to="/" variant="warning">
+          <Button  variant="warning" onClick={handleBack}>
             Volver a la Página Principal
           </Button>
         </Col>
