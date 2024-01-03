@@ -17,10 +17,10 @@ function Sidebar() {
  
 
   return (
-    <Navbar expand="md" className="bg-body-tertiary mb-3">
+    <Navbar expand="md" className="bg-body-tertiary mb-3 ">
       <Container>
         <Navbar.Brand href="#">
-          <h4 className="fw-bold"><FontAwesomeIcon icon={faCog} className="mr-2 fw-bold" />RestaurantApp</h4>
+          <h4 className="fw-bold"><FontAwesomeIcon icon={faCog} className="mr-2 fw-bold  text-primary" />RestaurantApp</h4>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="offcanvasNavbar" />
         <Navbar.Collapse id="offcanvasNavbar">

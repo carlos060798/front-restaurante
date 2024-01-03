@@ -7,8 +7,7 @@ import useLogin from "../hooks/uselogin";
 function Validseccion() {
   const { ValidarToken } = useLogin();
   const { token } = useParams();
-  console.log(token)
-
+ 
   return (
     <>
       <Container

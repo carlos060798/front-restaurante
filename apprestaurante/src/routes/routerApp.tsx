@@ -7,6 +7,7 @@ import LayautAdmin from '../compont/admin/layautadmin';
 
 import Profile from '../compont/general/profile';
 import { NotFound404Alternate } from '../compont/general/pagenotfound';
+import LoadingSpinner from '../compont/general/loading';
 
 
 const LazyUserComponent = lazy(() => import('../compont/admin/home'));
@@ -29,7 +30,7 @@ function RoutesApp() {
           <Route
             path="user"
             element={
-              <Suspense fallback={<div>Cargando...</div>}>
+              <Suspense fallback={<LoadingSpinner/>}>
                 <LazyUserComponent element={<LayautAdmin />} />
               </Suspense>
             }
@@ -43,7 +44,7 @@ function RoutesApp() {
           <Route
             path="email-login"
             element={
-              <Suspense fallback={<div>Cargando...</div>}>
+              <Suspense fallback={<LoadingSpinner/>}>
                 <LazyEmailSentSuccessComponent />
               </Suspense>
             }
@@ -52,7 +53,7 @@ function RoutesApp() {
           <Route
             path="validacion/:token"
             element={
-              <Suspense fallback={<div>Cargando...</div>}>
+              <Suspense fallback={<LoadingSpinner/>}>
                 <LazyValidseccionComponent />
               </Suspense>
             }
