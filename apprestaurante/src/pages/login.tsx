@@ -1,3 +1,5 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button, Form, Col, Container } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
@@ -9,10 +11,10 @@ const LoginForm = () => {
   return (
     <Container>
       <div className="d-flex align-items-center justify-content-center mt-5">
-        <Form className="border p-4 rounded col-12 col-md-6 col-lg-4 " onSubmit={handleSeccion}>
+        <Form className="border p-4 rounded col-12 col-md-6 col-lg-4 shadow" onSubmit={handleSeccion}>
           <h2 className="mb-4 text-center">Iniciar Sesión</h2>
-          <Col xs={12} lg={12} className="text-center">
-            <FontAwesomeIcon icon={faEnvelope} className="mr-4" />
+          <Form.Group as={Col} xs={12} lg={12} className="mb-3">
+            <FontAwesomeIcon icon={faEnvelope} className="mr-3" />
             <Form.Control
               type="email"
               placeholder="Ingresa tu email"
@@ -20,9 +22,9 @@ const LoginForm = () => {
               onChange={handleChangeUser}
               value={DataUser.correo}
             />
-          </Col>
-          <Col xs={12} lg={12} className="text-center">
-            <FontAwesomeIcon icon={faLock} className="mr-4" />
+          </Form.Group>
+          <Form.Group as={Col} xs={12} lg={12} className="mb-3">
+            <FontAwesomeIcon icon={faLock} className="mr-3" />
             <Form.Control
               type="password"
               placeholder="Ingresa tu contraseña"
@@ -30,12 +32,16 @@ const LoginForm = () => {
               onChange={handleChangeUser}
               value={DataUser.password}
             />
-          </Col>
-          {/* Elimina este formulario interno */}
-          {/* <Form>...</Form> */}
-          <Button variant="primary" type="submit" className="mx-auto d-block w-100 mt-3">
+          </Form.Group>
+          <Button variant="primary" type="submit" className="w-100 mt-3">
             Iniciar Sesión
           </Button>
+          <p className="mt-3 text-center">
+            ¿No tienes cuenta?{' '}
+            <Link to="/" className="text-primary">
+              Regístrate aquí
+            </Link>
+          </p>
         </Form>
       </div>
     </Container>
@@ -43,3 +49,4 @@ const LoginForm = () => {
 };
 
 export default LoginForm;
+

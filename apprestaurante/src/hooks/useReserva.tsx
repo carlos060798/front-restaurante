@@ -1,4 +1,5 @@
 import { ChangeEvent, useState} from "react";
+import Swal from "sweetalert2";
 function UseReserva() {
     const [DataReserva, setDataReserva] = useState({
         fechaReserva: "",
@@ -8,43 +9,10 @@ function UseReserva() {
 
     const [Reservas, setReservas] = useState([])
     const[Reserva, setReserva] = useState({})
-    const handleReserva = async (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-        e.preventDefault();
-        const usuarioid = localStorage.getItem("userId");
-        console.log(usuarioid);
-    
-        // Validar que no falten campos
-        if ([DataReserva.fechaReserva, DataReserva.tipoReserva, DataReserva.cantidadPersonas].includes("")) {
-            throw new Error("Invalid form data");
-        }
-    
-        try {
-            // Enviar al backend
-            const response = await fetch(`http://localhost:5000/api/reservation/${usuarioid}`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(DataReserva),
-            });    
-            if (response.ok) {
-                // Limpiar los valores del formulario después de una reserva exitosa
-                setDataReserva({
-                    fechaReserva: "",
-                    tipoReserva: "",
-                    cantidadPersonas: "",
-                });
-    
-                // Actualizar la lista de reservas
-                await getReservas();
-            } else {
-                throw new Error("Error al registrar usuario");
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    };
-    const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  
+  
+  
+      const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
         setDataReserva((prevFormData) => ({
             ...prevFormData,
@@ -53,7 +21,43 @@ function UseReserva() {
 
         console.log(DataReserva);
     };
-
+    const handleReserva = async (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        e.preventDefault();
+        const usuarioid = localStorage.getItem("userId");
+      
+        // Validar que no falten campos
+        
+      
+        try {
+          // Enviar al backend
+          const response = await fetch(`http://localhost:5000/api/reservation/${usuarioid}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(DataReserva),
+          });
+      
+          if (response.ok) {
+            Swal.fire({
+              icon: 'success',
+              title: '¡Registro exitoso!',
+              text: 'Reserva creada exitosamente.',
+            });
+      
+            setDataReserva({
+              fechaReserva: "",
+              tipoReserva: "",
+              cantidadPersonas: "",
+            });
+      
+            await getReservas();
+        
+        }
+        } catch (error) {
+          console.log(error);
+        }
+      }; 
     const getReservas = async () => {
         const usuarioId = localStorage.getItem("userId");
         try {

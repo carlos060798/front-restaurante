@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal  from "sweetalert2";
 
 function useLogin() {
   const [DataUser, setDataUser] = useState({
@@ -23,8 +24,13 @@ function useLogin() {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     e.preventDefault();
-    if ([DataUser.correo, DataUser.password].includes(""))
-      throw new Error("Por favor llenar todos los campos");
+    if ([DataUser.correo, DataUser.password].includes("")){
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Por favor, completa todos los campos.',
+    });
+    return;}
     try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
@@ -34,11 +40,17 @@ function useLogin() {
         body: JSON.stringify(DataUser),
       });
 
-      console.log(response);
+   
 
       if (response.status === 200) {
+
         const data = await response.json();
         localStorage.setItem("token", data.token);
+        Swal.fire({
+          icon: 'success',
+          title: '¡Registro exitoso!',
+          text: 'Atenticacion exitosa.',
+        });
         redirect("/email-login");
         console.log("correo de inicio de seccion enviados");
       } else {
