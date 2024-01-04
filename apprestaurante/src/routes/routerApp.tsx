@@ -1,20 +1,36 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LayautPublic from '../pages/layautpublic';
-import HomePage from '../pages/home';
-import LoginForm from '../pages/login';
-import LayautAdmin from '../compont/admin/layautadmin';
+import { lazy, Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LayautPublic from "../pages/layautpublic";
+import HomePage from "../pages/home";
+import LoginForm from "../pages/login";
+import LayautUser from "../compont/users/layautuser";
+import Profile from "../compont/general/profile";
+import { NotFound404Alternate } from "../compont/general/pagenotfound";
+import LoadingSpinner from "../compont/general/loading";
+import LayautAdmin from "../compont/admin/layautadmin";
 
-import Profile from '../compont/general/profile';
-import { NotFound404Alternate } from '../compont/general/pagenotfound';
-import LoadingSpinner from '../compont/general/loading';
+const LazyUserComponent = lazy(() => import("../compont/users/home"));
+const LazyCreateReservationComponent = lazy(() =>
+  import("../compont/users/componet/createreservation")
+);
+const LazyListReservationComponent = lazy(() =>
+  import("../compont/users/componet/listreservation")
+);
 
+const LazyAdminComponent = lazy(() => import("../compont/admin/home"));
+const LazyListComponent = lazy(() =>
+  import("../compont/admin/componet/Listviutdata")
+);
+const LazyUsersComponent = lazy(() =>
+  import("../compont/admin/componet/Listuser")
+);
 
-const LazyUserComponent = lazy(() => import('../compont/admin/home'));
-const LazyCreateReservationComponent = lazy(() => import('../compont/admin/componet/createreservation'));
-const LazyListReservationComponent = lazy(() => import('../compont/admin/componet/listreservation'));
-const LazyEmailSentSuccessComponent = lazy(() => import('../compont/general/pagemensage'));
-const LazyValidseccionComponent = lazy(() => import('../pages/validationseccion'));
+const LazyEmailSentSuccessComponent = lazy(() =>
+  import("../compont/general/pagemensage")
+);
+const LazyValidseccionComponent = lazy(() =>
+  import("../pages/validationseccion")
+);
 
 function RoutesApp() {
   return (
@@ -30,21 +46,39 @@ function RoutesApp() {
           <Route
             path="user"
             element={
-              <Suspense fallback={<LoadingSpinner/>}>
-                <LazyUserComponent element={<LayautAdmin />} />
+              <Suspense fallback={<LoadingSpinner />}>
+                <LazyUserComponent element={<LayautUser />} />
               </Suspense>
             }
           >
             <Route index element={<LazyCreateReservationComponent />} />
-            <Route path="reservation" element={<LazyCreateReservationComponent />} />
-            <Route path="listreservation" element={<LazyListReservationComponent />} />
+            <Route
+              path="reservation"
+              element={<LazyCreateReservationComponent />}
+            />
+            <Route
+              path="listreservation"
+              element={<LazyListReservationComponent />}
+            />
             <Route path="perfil" element={<Profile />} />
           </Route>
-
+          <Route
+            path="admin"
+            element={
+              <Suspense fallback={<LoadingSpinner />}>
+                <LazyAdminComponent element={<LayautAdmin />} />
+              </Suspense>
+            }
+          >
+            <Route index element={<LazyListComponent />} />
+            <Route path="listreservations" element={<LazyListComponent />} />
+            <Route path="listusers" element={<LazyUsersComponent />} />
+            <Route path="perfil" element={<Profile />} />
+          </Route>
           <Route
             path="email-login"
             element={
-              <Suspense fallback={<LoadingSpinner/>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <LazyEmailSentSuccessComponent />
               </Suspense>
             }
@@ -53,7 +87,7 @@ function RoutesApp() {
           <Route
             path="validacion/:token"
             element={
-              <Suspense fallback={<LoadingSpinner/>}>
+              <Suspense fallback={<LoadingSpinner />}>
                 <LazyValidseccionComponent />
               </Suspense>
             }

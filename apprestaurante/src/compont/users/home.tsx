@@ -3,7 +3,7 @@
 import { Navigate } from "react-router-dom";
 
 
-function RutaAdmin({ element }: { element: React.ReactNode }) {
+function RutaUser({ element }: { element: React.ReactNode }) {
   const token = localStorage.getItem("token");
 
   if (!token) {
@@ -12,4 +12,4 @@ function RutaAdmin({ element }: { element: React.ReactNode }) {
   return element;
 }
 
-export default RutaAdmin;
+export default RutaUser;

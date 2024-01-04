@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Swal  from "sweetalert2";
+import Swal from "sweetalert2";
 
 function useLogin() {
   const [DataUser, setDataUser] = useState({
@@ -24,13 +24,14 @@ function useLogin() {
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     e.preventDefault();
-    if ([DataUser.correo, DataUser.password].includes("")){
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Por favor, completa todos los campos.',
-    });
-    return;}
+    if ([DataUser.correo, DataUser.password].includes("")) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Por favor, completa todos los campos.",
+      });
+      return;
+    }
     try {
       const response = await fetch("http://localhost:5000/api/auth/login", {
         method: "POST",
@@ -40,16 +41,13 @@ function useLogin() {
         body: JSON.stringify(DataUser),
       });
 
-   
-
       if (response.status === 200) {
-
         const data = await response.json();
         localStorage.setItem("token", data.token);
         Swal.fire({
-          icon: 'success',
-          title: '¡Registro exitoso!',
-          text: 'Atenticacion exitosa.',
+          icon: "success",
+          title: "¡Registro exitoso!",
+          text: "Atenticacion exitosa.",
         });
         redirect("/email-login");
         console.log("correo de inicio de seccion enviados");
@@ -61,28 +59,6 @@ function useLogin() {
     }
   };
 
-  /*const ValidarToken = async (token: string) => {
-    try {
-      const response = await fetch(
-        `http://localhost:5000/api/auth/valdateseccion/${token}`,
-        {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          // No es necesario enviar el cuerpo en una solicitud GET
-        }
-      );
-
-      if (response.ok === true) {
-        redirect("/user");
-      } else {
-        redirect("/login");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  }; */
   const ValidarToken = async (token: string) => {
     try {
       const response = await fetch(
@@ -97,12 +73,19 @@ function useLogin() {
 
       if (response.ok === true) {
         const data = await response.json();
-
+        console.log(data);
         // Almacena el token y el ID del usuario en el almacenamiento local
 
         localStorage.setItem("userId", data.userdata.id);
-        redirect("/user");
+        if (data.userdata.rol === "admin") {
+          console.log("desde admin")
+          redirect("/admin");
+        } else {
+          console.log("desde user")
+          redirect("/user");
+        }
       } else {
+        console.log("Error al validar el token");
         redirect("/login");
       }
     } catch (error) {

@@ -1,14 +1,13 @@
-
+import Sidebar from "./componet/NavbarAdmin";
 import { Container, Row } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
 import UseLogin from "../../hooks/uselogin";
-import SidebarAdmin from "./componet/Navbar";
 
-function LayautAdmin() {
+function LayautUser() {
   const {CerrarSeccion} = UseLogin();
   return (
     <>
-      <SidebarAdmin CerrarSeccion={CerrarSeccion} />
+      <Sidebar CerrarSeccion={CerrarSeccion} />
 
       <Row lg={9} md={9} xs={12} className="w-100 h-100">
         <Container>
@@ -19,4 +18,4 @@ function LayautAdmin() {
   );
 }
 
-export default LayautAdmin;
+export default LayautUser;
