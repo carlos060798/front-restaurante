@@ -98,12 +98,44 @@ function useLogin() {
     localStorage.removeItem("userId");
     redirect("/login");
   };
+
+ const  handlesendemail= async()=> 
+ {
+  const token = localStorage.getItem("token");
+  const opciones= {
+    asunto: "inicio de seccion",
+    mensaje: "Para iniciar sesión haz clic en el siguiente link",
+    link: `http://localhost:3000/email-login/${token}`
+  }
+
+  const response = await fetch(`http://localhost:5000/api/auth/repeatemail/${token}`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(opciones),
+  });
+
+  if (response.status === 200) {
+    const data = await response.json();
+    Swal.fire({
+      icon: "success",
+      title: "¡Registro exitoso!",
+      text: data.msg
+    });
+    redirect("/email-login");
+    console.log("correo de inicio de seccion enviados");
+  } else {
+    throw new Error("Error al enviar los datos");
+  }
+ }
   return {
     handleChangeUser,
     handleSeccion,
     DataUser,
     ValidarToken,
     CerrarSeccion,
+    handlesendemail
   };
 }
 

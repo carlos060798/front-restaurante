@@ -1,4 +1,4 @@
-import { Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
+import { Button, Container, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faUtensils,
@@ -47,7 +47,7 @@ function Sidebar() {
                   <FontAwesomeIcon icon={faUser} className="mr-2" />
                   Perfil
                 </Nav.Link>
-                <Nav.Link as={Link} to="#" onClick={CerrarSeccion}>
+                <Nav.Link as={Button}  onClick={CerrarSeccion}>
                   <FontAwesomeIcon icon={faSignOutAlt} className="mr-2" />
                   Sign Out
                 </Nav.Link>
