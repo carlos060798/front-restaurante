@@ -38,6 +38,12 @@ const LoginForm = () => {
           </Button>
           <p className="mt-3 text-center">
             ¿No tienes cuenta?{' '}
+            <Link to="/send-email/password" className="text-primary">
+              ¿Olvidaste tu contraseña?
+            </Link>
+          </p>
+          <p className="mt-3 text-center">
+            ¿No tienes cuenta?{' '}
             <Link to="/" className="text-primary">
               Regístrate aquí
             </Link>

@@ -32,6 +32,12 @@ const LazyValidseccionComponent = lazy(() =>
   import("../pages/validationseccion")
 );
 
+const LazyEmailSendchange = lazy(() =>
+  import("../compont/general/sendemail")
+)
+const LazyChangePassword = lazy(() =>
+  import("../compont/general/changepassword")
+)
 function RoutesApp() {
   return (
     <>
@@ -94,6 +100,8 @@ function RoutesApp() {
           />
 
           <Route path="*" element={<NotFound404Alternate />} />
+          <Route path="/send-email/password" element={<LazyEmailSendchange />} />
+          <Route path="/change-password" element={<LazyChangePassword />} />
         </Routes>
       </BrowserRouter>
     </>

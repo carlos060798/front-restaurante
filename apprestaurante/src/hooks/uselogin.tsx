@@ -105,7 +105,7 @@ function useLogin() {
   const opciones= {
     asunto: "inicio de seccion",
     mensaje: "Para iniciar sesión haz clic en el siguiente link",
-    link: `http://localhost:3000/email-login/${token}`
+    link: `http://localhost:5173/validacion/${token}`
   }
 
   const response = await fetch(`http://localhost:5000/api/auth/repeatemail/${token}`, {
