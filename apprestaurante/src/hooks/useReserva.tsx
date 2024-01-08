@@ -1,4 +1,4 @@
-import { ChangeEvent, useState} from "react";
+import { ChangeEvent, useState, FormEvent} from "react";
 import Swal from "sweetalert2";
 function UseReserva() {
     const [DataReserva, setDataReserva] = useState({
@@ -21,7 +21,7 @@ function UseReserva() {
 
         console.log(DataReserva);
     };
-    const handleReserva = async (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const handleReserva = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const usuarioid = localStorage.getItem("userId");
       

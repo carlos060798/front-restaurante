@@ -47,7 +47,15 @@ function UseAdmin() {
             },
 
           }); 
-      const data = await response.json();
+      if (response.status === 200) {
+        Swal.fire({
+          icon: "success",
+          title: "Usuario eliminado",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        getdatausers();
+      }
       Swal.fire({
         icon: "success",
         title: "Usuario eliminado",
@@ -59,7 +67,7 @@ function UseAdmin() {
       console.log(error);
     }
   };
-  const aprobatereserva = async (id) => {
+  const aprobatereserva = async (id:string) => {
     const estatus = {
       estado: "Aprobado",
     };

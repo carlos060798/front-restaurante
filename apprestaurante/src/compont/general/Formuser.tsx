@@ -15,7 +15,7 @@ function FormUser() {
   return (
     <>
     <Col xs={12} md={10} lg={8} >  
-      <Form className="bg-light p-4 rounded" onSubmit={handleRegistro}>
+    <Form className="bg-light p-4 rounded" onSubmit={ handleRegistro}>
         <Form.Group controlId="formFirstName">
           <Form.Label>
             <FontAwesomeIcon icon={faUser} className="mr-2 text-primary" />

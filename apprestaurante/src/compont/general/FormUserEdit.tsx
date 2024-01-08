@@ -1,12 +1,11 @@
 
-import React from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser, faEnvelope, faLock, faSignInAlt, faIdCard } from '@fortawesome/free-solid-svg-icons';
 import useProfile from '../../hooks/useProfile';
 
 function FormProfile() {
-  const { profileData, formData, handleChange, handleUpdateProfile } = useProfile();
+  const {  formData, handleChange, handleUpdateProfile } = useProfile();
 
   return (
     <>

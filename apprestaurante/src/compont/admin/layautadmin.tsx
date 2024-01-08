@@ -1,14 +1,12 @@
 
 import { Container, Row } from "react-bootstrap";
 import { Outlet } from "react-router-dom";
-import UseLogin from "../../hooks/uselogin";
 import SidebarAdmin from "./componet/Navbar";
 
 function LayautAdmin() {
-  const {CerrarSeccion} = UseLogin();
   return (
     <>
-      <SidebarAdmin CerrarSeccion={CerrarSeccion} />
+      <SidebarAdmin  />
 
       <Row lg={9} md={9} xs={12} className="w-100 h-100">
         <Container>

@@ -1,8 +1,14 @@
-import { useEffect } from 'react';
+import { useEffect,FormEvent } from 'react';
 import { Form, Button, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCalendarAlt, faClipboardList, faUsers, faPlus } from '@fortawesome/free-solid-svg-icons';
 import UseReserva from '../../../hooks/useReserva';
+
+
+interface Props {
+  initialData: string
+  onSubmit: () => void;
+}
 
 const FormEdit = ({ initialData, onSubmit }: Props) => {
   const { handleChange, DataReserva, setDataReserva, getReserva ,updateReserva} = UseReserva();
@@ -22,7 +28,7 @@ const FormEdit = ({ initialData, onSubmit }: Props) => {
   
   }, [initialData]);
 
-  const handlesubmit = async (e) => {
+  const handlesubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {

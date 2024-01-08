@@ -9,7 +9,7 @@ import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
 function ListReservation()  {
   const [showModal, setShowModal] = useState(false);
-  const [reservaSeleccionadaid, setReservaSeleccionadaid] = useState('');
+  const [reservaSeleccionadaid, setReservaSeleccionadaid] = useState<string | undefined>(undefined);
   const {deleteReserva } = UseReserva();
 
  
@@ -48,11 +48,11 @@ const handleEdit = async (id: string) => {
         show={showModal}
         onHide={() => setShowModal(false)}
         onSubmit={handleModalSubmit}
-        reservationData={reservaSeleccionadaid || "valor por defecto"}
+        reservationData={reservaSeleccionadaid ? { id: reservaSeleccionadaid } : { id: "" }}
       />
     </div>
     </Container>
   );
-};
+}
 
 export default ListReservation;

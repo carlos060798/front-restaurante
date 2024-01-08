@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState,FormEvent} from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
@@ -20,8 +20,7 @@ function useLogin() {
     }));
   };
 
-  const handleSeccion = async (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  const handleSeccion = async (e: FormEvent<HTMLFormElement>
   ) => {
     e.preventDefault();
     if ([DataUser.correo, DataUser.password].includes("")) {

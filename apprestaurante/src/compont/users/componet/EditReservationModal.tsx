@@ -1,10 +1,16 @@
 import { Modal, Button } from 'react-bootstrap';
 import FormEdit from './EditForm'; 
+
+
+export interface ReservationData {
+  id: string;
+}
+
 interface Options {
   show: boolean;
   onHide: () => void;
-  onSubmit: (data: ReservationData) => void;
-  reservationData: ReservationData; // Tipo explícito para reservationData
+  onSubmit: () => void;
+  reservationData: ReservationData;
 }
 
 
@@ -16,7 +22,7 @@ const EditReservationModal = ({ show, onHide, onSubmit, reservationData }:Option
         <Modal.Title>Editar Reserva</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        < FormEdit onSubmit={onSubmit} initialData={reservationData} />
+        < FormEdit onSubmit={onSubmit} initialData={reservationData.id} />
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onHide}>

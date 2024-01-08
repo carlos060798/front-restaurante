@@ -22,7 +22,7 @@ function Validseccion() {
           <Button
             variant="success"
             className="w-100 mb-3"
-            onClick={() => ValidarToken(token)}
+            onClick={() =>token &&  ValidarToken(token)}
           >
             Validar Token
           </Button>
